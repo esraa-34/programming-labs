@@ -1,0 +1,172 @@
+#include <stdio.h>
+#include <conio.h>
+#include <string.h>
+
+int st1[40];
+char st2[40];
+int top1,top2;
+void push1(int d);
+int pop1(void);
+void push2(char c);
+char pop2(void);
+int operation(int op1,int op2,char oper);
+int proir(char ch);
+int Linecalc(char st[] );
+
+int main(){
+
+clrscr();
+printf("%d", Linecalc("1*2+1"));
+
+
+
+
+getch();
+
+return 0;
+}
+int operation(int op1,int op2,char oper){
+   int result;
+ switch(oper){
+  case '+':
+      result=op2+op1;
+      break;
+  case '-':
+      result=op2-op1;
+      break;
+  case '*':
+      result=op1*op2;
+      break;
+
+  case '/':
+       if(op2 != 0){
+      result=op2/op1;
+
+       }else{printf("devide by zero");}
+      break;
+
+
+ }
+
+  return result;
+
+}
+int proir(char ch){
+  int p=0;
+  switch(ch){
+    case '+':
+    case '-':
+      p=1;
+      break;
+    case '*':
+    case '/':
+       p=2;
+       break;
+
+  }
+  return p;
+
+}
+int Linecalc(char st[]){
+int retval=0;
+int i,operand;
+for(i=0;i<strlen(st);i++){
+
+    if(st[i]>='0'&&st[i]<='9'){
+
+       operand=st[i]-'0';
+      push1(operand);
+
+    }/* if(st[i-1]>='0'&&st[i-1]<='9'){
+      if(i<strlen(st)){
+	 operand*=10;
+	operand=operand+(st[i]-'0');
+	 
+	 push1(operand);
+       }
+  } */
+
+    else if(st[i]=='+'||st[i]=='-'||st[i]=='*'||st[i]=='/'){
+
+	 while(top1&&proir(st[i])<proir(st2[top2-1])){
+
+	   int op1=pop1();
+	   int op2=pop1();
+	   char o=pop2();
+	   int res=operation(op1,op2,o);
+	   push1(res);
+
+	 }
+	 push2(st[i]);
+
+
+    }}
+
+    while(top2){
+      int op1=pop1();
+      int op2= pop1();
+      int o=pop2();
+      int res=operation(op1,op2,o);
+
+      push1(res);
+
+    }
+
+
+
+
+
+
+
+
+
+
+  // retval= pop1();
+
+  retval=pop1();
+  return retval;
+
+
+
+}
+
+void push1(int d){
+
+if(top1<30){
+  st1[top1]=d;
+  top1++;
+
+}
+
+
+}
+int pop1(void){
+int retval=0;
+if(top1){
+
+ top1--;
+ retval=st1[top1];
+}
+return retval;
+
+}
+void push2(char c){
+
+if(top2<30){
+  st2[top2]=c;
+  top2++;
+
+}
+
+}
+char pop2(void){
+  char retval='\0';
+  if(top2){
+   top2--;
+   retval=st2[top2];
+
+  }
+
+    return retval;
+
+}

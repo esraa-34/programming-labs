@@ -1,0 +1,195 @@
+//Q1
+
+#include <iostream.h>
+#include <conio.h>
+#include <string.h>
+
+class person{
+protected:
+  int id;
+  char name[6];
+   public:
+   person(){
+    id=0;
+    strcpy(name,"nadaa");
+   }
+   person(int i,char n[6]){
+    id=i;
+    strcpy(name,n);
+
+   }
+   void setid(int i){
+   id=i;
+   }
+   void setname(char n[6]){
+    strcpy(name,n);
+   }
+   int getid(){
+     return id;
+   }
+   char* getname(){
+     return name;
+
+   }
+   void print_data(){
+    cout<<"ID: "<<id<<endl;
+    cout<<"NAME: "<<name<<endl;
+   }
+
+
+};
+
+class Employee:protected person{
+ float salary;
+ public:
+   Employee():person(0,"eeee"){
+    salary=0;
+
+   }
+   Employee(int i,char n[6], float s):person(i,n){
+    salary=s;
+   }
+   void setsal(float s){
+     salary=s;
+   }
+   float getsal(){
+    return salary;
+   }
+   void print_data(){
+
+    cout<<"ID: "<<id<<endl;
+    cout<<"NAME: "<<name<<endl;
+    cout<<"SALARY: "<<salary<<endl;
+   }
+
+
+
+};
+
+class customer:public person{
+  float account_n;
+  public:
+   customer(){
+    account_n=0;
+   }
+   customer(int i,char n[6],float acc):person(i,n){
+     account_n=acc;
+   }
+   void setacc(float acc){
+    account_n=acc;
+   }
+   float getacc(){
+    return account_n;
+   }
+   void print_data(){
+
+    cout<<"ID: "<<id<<endl;
+    cout<<"NAME: "<<name<<endl;
+    cout<<"ACCOUNT NUMBER: "<<account_n<<endl;
+   }
+
+
+};
+int main(){
+ clrscr();
+ Employee ee();
+ Employee e(1,"saraa",2000000);
+ e.print_data();
+ customer cc();
+ customer c(2,"saraa",101);
+ ee.print_data();
+
+
+getch();
+return 0;
+}
+
+//Q2
+
+#include <iostream.h>
+#include <conio.h>
+
+class Base{
+ protected:
+   int z;
+ public:
+    Base(){
+     z=1;
+    }
+    Base(int m){
+     z=m;
+    }
+    void setz(int m){
+     z=m;
+    }
+    int getz(){
+     return z;
+    }
+
+};
+class base1:virtual public Base{
+ protected:
+  int x;
+ public:
+  base1(){
+   x=0;
+  }
+  base1(int m):Base(m){
+     x=m;
+  }
+  int getx(){
+   return x;
+  }
+  void setx(int m){
+   x=m;
+  }
+
+
+
+};
+class base2:virtual public Base{
+ protected:
+  int y;
+ public:
+  base2(){
+   y=0;
+  }
+  base2(int m):Base(m){
+     y=m;
+  }
+  int gety(){
+   return y;
+  }
+  void sety(int m){
+   y=m;
+  }
+
+
+
+};
+
+class Derived:public base1,public base2{
+ public:
+   Derived(){ }
+   Derived(int m,int n):base2(m),base1(n){}
+   int product(){
+    return (x*y);
+   }
+   void print(){
+
+    cout<<"x"<<x<<endl;
+    cout<<"y"<<y<<endl;
+    cout<<"z"<<Base::z<<endl;
+    cout<<"z"<<base2::z<<endl;
+
+   }
+
+};
+int main(){
+clrscr();
+Derived dd(3,4);
+cout<<dd.product()<<endl;
+dd.print();
+getch();
+return 0;
+}

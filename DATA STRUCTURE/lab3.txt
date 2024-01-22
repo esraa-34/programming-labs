@@ -1,0 +1,93 @@
+//Queue
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct student {
+    int id;
+    char name[20];
+};
+
+int front ;
+int rear ;
+struct student sst[10];
+
+struct student fill_student(void);
+void printstudent(struct student st);
+int Enqueue(struct student st);
+struct student Dequeue(void);
+
+int main() {
+    char choice;
+    int flag = 1;
+    int re;
+    clrscr();
+    printf("1. Enqueue\n");
+    printf("2. Dequeue\n");
+    printf("3. Exit\n");
+
+    while (flag) {
+        choice = getchar();
+        switch (choice) {
+            case '1':
+                sst[rear] = fill_student();
+                re = Enqueue(sst[rear]);
+                printf("%d", re);
+                break;
+
+            case '2':
+                sst[front] = Dequeue();
+                printstudent(sst[front]);
+                break;
+
+            case '3':
+                flag = 0;
+                break;
+        }
+    }
+
+    return 0;
+}
+
+struct student fill_student(void) {
+    struct student st;
+    printf("Enter your ID \n");
+    scanf("%d", &st.id);
+    printf("Enter your Name \n");
+    scanf("%s", st.name);
+
+    return st;
+}
+
+void printstudent(struct student st) {
+    printf("\n");
+    printf("ID IS: %d", st.id);
+    printf("\n");
+    printf("NAME IS: %s", st.name);
+}
+
+int Enqueue(struct student st) {
+    int retval = 0;
+    if (rear < 10) {
+        sst[rear] = st;
+        rear++;
+        retval = 1;
+    }
+    return retval;
+}
+
+struct student Dequeue(void) {
+    struct student retval;
+    int i;
+    if (rear > 0) {
+        retval = sst[front];
+        if (rear > 1) {
+            for (i = 0; i < rear - 1; i++) {
+                sst[i] = sst[i + 1];
+            }
+        }
+        rear--;
+    }
+    return retval;
+}

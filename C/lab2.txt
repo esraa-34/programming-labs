@@ -1,0 +1,91 @@
+//Q1
+
+#include <stdio.h>
+#include <conio.h>
+#include <math.h>
+int main(){
+int n1,n2,n3,n4,n5,max,min;
+clrscr();
+printf("enter first number");
+scanf("%d",&n1);
+printf("enter second number");
+scanf("%d",&n2);
+printf("enter third number");
+scanf("%d",&n3);
+printf("enter fourth number");
+scanf("%d",&n4);
+printf("enter fifth number");
+scanf("%d",&n5);
+max= n1;
+min=n1;
+if(max<n1){
+max=n1;
+}
+if(max<n2){
+max=n2;
+
+}if(max<n3){
+max=n3;
+}
+if(max<n4){
+max=n4;
+
+}
+if(max<n5){
+max=n5;
+
+}
+
+if(min>n1){
+min=n1;
+}
+if(min>n2){
+min=n2;
+}
+
+if(min>n3){
+min=n3;
+}
+if(min>n4){
+min=n4;
+}
+if(min>n5){
+min=n5;
+}
+
+printf("max= %d,min= %d",max,min);
+
+getch();
+return 0;
+}
+
+//Q2
+
+#include <stdio.h>
+#include <math.h>
+#include <conio.h>
+
+int main(){
+int a,b,c,x,sol1,sol2;
+clrscr();
+printf("Enter the coffecient a,b,c");
+scanf("%d",&a);
+scanf("%d",&b);
+scanf("%d",&c);
+x=(pow(b,2)-4*a*c);
+if(x>0){
+printf("you have two solutions");
+sol1=(-b+(sqrt(x))/(2*a));
+sol2=(-b-(sqrt(x))/(2*a));
+printf("%d,%d",sol1,sol2);
+} else if(x==0){
+printf("you have one solution");
+sol1=(-b/(2*a));
+printf("%d",sol1);
+}
+else if(x<0){
+printf("you have an imaginary solution");
+}
+getch();
+return 0;
+}

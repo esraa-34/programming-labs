@@ -1,0 +1,331 @@
+//linked list
+
+#include <stdio.h>
+#include <conio.h>
+#include <alloc.h>
+#include <string.h>
+struct student{
+int id;
+char name[10];
+//int grades[3];
+
+};
+struct node{
+struct student stu;
+struct node* pprev;
+struct node * pnext;
+};
+struct node* phead;
+struct node *ptail;
+struct student fill_name(void);
+void printstudent(struct student st);
+struct node* createnode(struct student st);
+int addnode(struct student st);
+int insertnode(struct student st,int loc);
+struct node* searchid(int d);
+struct node* searchname(char str[10] );
+int deletenode(int loc);
+void printlist(struct node st);
+int insertNodeDescending(struct student st);
+
+int main(){
+int i=0;
+char name[10];
+int loc;
+struct node* ptr;
+struct node s;
+int id;
+int row=1;
+int col=1;
+int flag=0;
+char ch;
+clrscr();
+printf("1.ADD\n");
+printf("2.insert\n");
+printf("3.search by id\n");
+printf("4.search by name\n");
+printf("5.delete\n");
+printf("6.print list\n");
+printf("7.exit\n");
+gotoxy(col,row);
+while(flag !=1){
+ch=getch();
+ if(ch=='\0'){
+   ch=getch();
+    if(ch==80&&row<8){
+      row++;
+      gotoxy(col,row);
+    }
+    else if(ch==72 &&row>1){
+       row--;
+       gotoxy(col,row);
+
+    } else if(ch==71){
+       row=1;
+       gotoxy(col,row);
+     }else if(ch==79){
+       row=7;
+       gotoxy(col,row);
+
+     }
+
+ }else{
+ if(ch==27){
+ flag=1;
+ }else if(ch==13){
+ clrscr();
+ printf("1.ADD\n");
+ printf("2.insert\n");
+ printf("3.search by id\n");
+ printf("4.search by name\n");
+ printf("5.delete\n");
+ printf("6.print list\n");
+ printf("7.exit\n");
+ if(row==1){
+// gotoxy(1,10);
+  s.stu= fill_name();
+  i= addnode(s.stu);
+  printf("%d",i);
+ }
+  else if(row==2){
+
+  s.stu=fill_name();
+ // printf("Enter location\n");
+ // scanf("%d",&loc);
+ // i=insertnode(s.stu,loc);
+ i= insertNodeDescending( s.stu);
+  printf("%d",i);
+  }
+ else if(row==3){
+ printf("Enter id\n");
+ scanf("%d",&id);
+ptr= searchid(s.stu.id);
+ printf("%p",ptr);
+ }
+ else if(row==4){
+ printf("Enter name\n");
+ scanf("%s",name);
+ptr= searchname(s.stu.name);
+ printf("%p",ptr);
+ }
+ else if(row==5){
+    printf("Enter location\n");
+  scanf("%d",&loc);
+   i=deletenode(loc);
+     printf("%d",i);
+ }
+ else if(row==6){
+    printlist(s);
+ }
+ else if(row==7){flag=1;}
+
+ }
+
+ }
+
+  }
+
+
+
+
+
+
+return 0;
+}
+struct student fill_name(void){
+struct student st;
+printf("Enter your ID\n");
+scanf("%d",&st.id);
+printf("Enter your name\n");
+scanf("%s",st.name);
+
+ return st;
+
+
+}
+void printstudent(struct student st){
+
+printf("%d\n",st.id);
+printf("%s\n",st.name);
+
+
+}
+struct node* createnode(struct student st){
+struct node* ptr;
+ptr=(struct node*) malloc(sizeof(struct node));
+if(ptr){
+ptr ->stu=st;
+ptr ->pprev=NULL;
+ptr ->pnext=NULL;
+}
+return ptr;
+
+}
+int addnode(struct student st){
+int ret=0;
+struct node *ptr;
+ptr=createnode(st);
+if(ptr){
+ret=1;
+if(phead==NULL){
+phead=ptr;
+ptail=ptr;
+
+}else{
+ptail -> pnext=ptr;
+ptr ->pprev=ptail;
+ptail=ptr;
+
+}
+
+}
+return ret;
+
+}
+int insertnode(struct student st,int loc){
+int ret=0,i;
+struct node *ptr,*temp;
+ptr=createnode(st);
+if(ptr){
+ret=1;
+    if(phead==NULL){
+      phead=ptail=ptr;
+    }else if(loc==0){
+      ptr ->pnext=phead;
+      phead ->pprev=ptr;
+      phead=ptr;
+    } else{
+      temp=phead;
+      for(i=0;i<loc-1&&temp;i++){
+	temp=temp ->pnext;
+      }
+       if(temp==NULL||temp==ptail){
+	  ptail ->pnext =ptr;
+	  ptr ->pprev=ptail;
+	  ptail=ptr;
+
+       }else{
+	  (temp -> pnext) ->pprev=ptr;
+	  ptr -> pnext =temp -> pnext;
+	  ptr ->pprev=temp;
+	  temp -> pnext =ptr;
+
+       }
+
+    }
+
+}
+return ret;
+}
+struct node* searchid(int d){
+struct node * ptemp;
+ptemp=phead;
+while(ptemp&&ptemp ->stu.id != d){
+  ptemp= ptemp ->pnext;
+}
+ return ptemp;
+}
+struct node* searchname(char str[10] ){
+struct node * ptemp;
+ptemp=phead;
+while(ptemp&&strcmp(ptemp ->stu.name , str)!=0){
+  ptemp= ptemp ->pnext;
+}
+ return ptemp;
+}
+int deletenode(int loc){
+ int retval=0;
+ struct node *pcurr;
+ int i;
+ if(phead){
+  if(loc==0){
+   pcurr=phead;
+   phead=phead ->pnext;
+   if(phead){
+   phead ->pprev=NULL;
+
+   }else{
+   ptail= NULL;
+   }
+   free(pcurr);
+   retval=1;
+
+  }else{
+   pcurr=phead;
+   for(i=0;i<loc&&pcurr;i++){
+     pcurr=pcurr ->pnext;
+   }if(pcurr){
+      if(pcurr==ptail){
+      ptail= ptail ->pprev;
+      ptail ->pnext =NULL;
+      }else{
+       pcurr ->pprev ->pnext=pcurr ->pnext;
+       pcurr ->pnext ->pprev = pcurr ->pprev;
+
+
+      } free(pcurr);
+	retval=1;
+
+
+   }
+
+
+  }
+}
+return retval;
+}
+void printlist(struct node st){
+struct node *ptr;
+
+ptr=phead;
+while(ptr != NULL){
+//printstudent((st.stu));
+printf("\n");
+printf("%d",ptr ->stu.id);
+printf("\n");
+printf("%s",ptr ->stu.name);
+ptr=ptr ->pnext;
+
+}}
+
+int insertNodeDescending(struct student st) {
+    int ret = 0;
+    struct node *ptr, *temp;
+    ptr = createnode(st);
+
+    if (ptr) {
+        ret = 1;
+
+        if (phead == NULL) {
+            phead = ptail = ptr;
+        } else {
+            temp = phead;
+
+            // Traverse the list to find the correct position
+	    while (temp != NULL && st.id < temp->stu.id) {
+                temp = temp->pnext;
+            }
+
+            // Insert at the beginning
+            if (temp == phead) {
+                ptr->pnext = phead;
+                phead->pprev = ptr;
+                phead = ptr;
+            } else {
+                // Insert at the end or middle
+                if (temp == NULL) {
+                    ptail->pnext = ptr;
+                    ptr->pprev = ptail;
+                    ptail = ptr;
+                } else {
+                    (temp->pprev)->pnext = ptr;
+                    ptr->pprev = temp->pprev;
+                    ptr->pnext = temp;
+                    temp->pprev = ptr;
+                }
+            }
+        }
+    }
+
+    return ret;
+}

@@ -1,0 +1,131 @@
+//BST
+
+#include <stdio.h>
+#include <conio.h>
+#include <string.h>
+#include <alloc.h>
+
+struct node{
+int data;
+struct node *pleft;
+struct node *pright;
+
+};
+struct node * createnode(int d);
+struct node * insert(struct node * pnode,int d);
+void Inorder(struct node *root);
+void preorder(struct node *root);
+void postorder(struct node *root);
+struct node * search(struct node * pnode,int d);
+
+int main(){
+
+ struct node * root=NULL;
+ struct node * ss=NULL;
+ clrscr();
+ root=insert(root,7);
+ insert(root,3);
+
+ insert(root,2);
+
+ insert(root,1);
+
+Inorder(root);
+printf("\n");
+preorder(root);
+printf("\n");
+postorder(root);
+printf("\n");
+  ss=search(root,5);
+  printf("%d",ss->data);
+ getch();
+return 0;
+
+}
+
+struct node * createnode(int d){
+ struct node *ptr;
+ ptr= (struct node *) malloc(sizeof(struct node));
+ if(ptr){
+
+   ptr -> data=d;
+   ptr -> pleft =NULL;
+   ptr -> pright=NULL;
+
+ }
+  return ptr;
+
+}
+struct node * insert(struct node * pnode,int d){
+
+     if(pnode==NULL){
+       pnode=createnode(d);
+
+     }else if(pnode -> data >= d){
+
+	pnode -> pleft= insert(pnode -> pleft,d);
+
+     }else{
+
+
+	pnode -> pright=insert(pnode -> pright,d);
+
+     }
+
+     return pnode;
+
+
+
+}
+void Inorder(struct node *root){
+ if(root != NULL){
+    Inorder(root -> pleft);
+    printf("%d",root -> data);
+    Inorder(root -> pright);
+
+
+ }
+
+
+}
+void preorder(struct node *root){
+ if(root != NULL){
+    printf("%d",root -> data);
+    preorder(root -> pleft);
+    preorder(root -> pright);
+
+
+ }
+
+
+}
+void postorder(struct node *root){
+ if(root != NULL){
+   postorder(root -> pleft);
+   postorder(root ->pright );
+   printf("%d",root -> data);
+
+
+ }
+
+
+}
+
+struct node * search(struct node * pnode,int d){
+   while(pnode -> data != d&&pnode!=NULL){
+
+     if(pnode -> data >= d){
+
+      pnode= pnode -> pleft;
+
+     }else{
+
+      pnode = pnode -> pright;
+
+     }
+
+
+   }
+    return pnode;
+
+}

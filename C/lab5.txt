@@ -1,0 +1,191 @@
+//Q1
+
+#include <stdio.h>
+#include <conio.h>
+int main(){
+
+int min,max,i,j;
+int arr[5];
+clrscr();
+printf("Enter the numbers\n");
+for(i=0;i<5;i++){
+scanf("%d",&arr[i]);
+}
+max=arr[0];
+min=arr[0];
+for(j=0;j<5;j++){
+if(arr[j]>max){
+
+max=arr[j];
+}
+if(arr[j]<min){
+min=arr[j];
+
+}
+}
+printf("The max is: %d\n",max);
+printf("The min is: %d\n",min);
+getch();
+return 0;
+}
+
+//Q2
+
+#include <stdio.h>
+#include <conio.h>
+
+int main(){
+int score[4][3];
+int i,j;
+float sum=0;
+clrscr();
+
+printf("Enter grade of four students\n");
+
+for(i=0;i<4;i++){
+   for(j=0;j<3;j++){
+   scanf("%d",&score[i][j]);
+   }
+   printf("\n");
+}
+printf("The total for each student:\n");
+for(i=0;i<4;i++){
+   for(j=0;j<3;j++){
+     sum=sum+score[i][j];
+   }
+   printf("Student %d = %f",(i+1),sum);
+   printf("\n");
+   sum=0;
+}
+printf("The Average for each subject:\n");
+for(i=0;i<3;i++){
+   for(j=0;j<4;j++){
+     sum=sum+score[j][i];
+   }
+   printf("Average of each subject %d = %f",(i+1),(sum/3));
+   printf("\n");
+   sum=0;
+}
+getch();
+return 0;
+}
+
+//Q2
+
+#include <stdio.h>
+#include <conio.h>
+
+int main(){
+int score[4][3];
+int i,j;
+float sum=0;
+clrscr();
+
+printf("Enter grade of four students\n");
+
+for(i=0;i<4;i++){
+   for(j=0;j<3;j++){
+   scanf("%d",&score[i][j]);
+   }
+   printf("\n");
+}
+printf("The total for each student:\n");
+for(i=0;i<4;i++){
+   for(j=0;j<3;j++){
+     sum=sum+score[i][j];
+   }
+   printf("Student %d = %f",(i+1),sum);
+   printf("\n");
+   sum=0;
+}
+printf("The Average for each subject:\n");
+for(i=0;i<3;i++){
+   for(j=0;j<4;j++){
+     sum=sum+score[j][i];
+   }
+   printf("Average of each subject %d = %f",(i+1),(sum/3));
+   printf("\n");
+   sum=0;
+}
+getch();
+return 0;
+}
+
+//Q3
+
+#include <stdio.h>
+#include <conio.h>
+#include <string.h>
+int main(){
+char fname[10];
+char lname[10];
+char full[20];
+
+clrscr();
+printf("Enter your first and last name \n");
+scanf("%s",fname);
+scanf("%s",lname);
+strcpy(full,fname);
+strcat(full," ");
+strcat(full,lname);
+printf("Full name is: %s",full);
+getch();
+return 0;
+}
+
+//Q4
+
+#include <stdio.h>
+#include <conio.h>
+#include <string.h>
+int main(){
+char str1[10];
+char str2[10];
+int x=0;
+clrscr();
+printf("Enter string");
+scanf("%s",str1);
+scanf("%s",str2);
+x=strcmp(str1,str2);
+printf("%d",x);
+getch();
+return 0;
+}
+
+//Q5
+
+#include <stdio.h>
+#include <conio.h>
+
+int strcmp(char str1[],char str2[]);
+int main(){
+
+clrscr();
+printf("The value of comparison = %d",strcmp("saraa so","saraa sa"));
+
+getch();
+return 0;
+}
+int strcmp(char str1[],char str2[]){
+
+
+int i=0;
+int s=0;
+while((str1[i]!='\0'||str2[i]!='\0')){
+  if(str1[i]>str2[i]){
+     return 1;
+     break;
+    }else if(str1[i]<str2[i]){
+     return -1;
+     break;
+
+    }else if(str1[i]==str2[i]){
+
+     s++;
+
+    }
+     i++;
+}
+if(s==i){return 0;}
+
+}

@@ -1,0 +1,109 @@
+//stack
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct student {
+    int id;
+    char name[20];
+};
+
+struct node {
+    struct student ss;
+    struct node *pprev;
+};
+
+struct node *ptail;
+
+struct student fill_name(void);
+void print_student(struct student st);
+int push(struct student st);
+struct student pop(void);
+
+int main() {
+    int i;
+    int flag;
+    struct node n;
+    char choice;
+     clrscr();
+    flag = 1;
+    printf("1. push\n");
+    printf("2. pop\n");
+    printf("3. exit\n");
+
+    while (flag == 1) {
+        choice = getchar();
+        printf("\n");
+
+        switch (choice) {
+            case '1':
+                n.ss = fill_name();
+                i = push(n.ss);
+                printf("%d", i);
+                break;
+
+            case '2':
+                n.ss = pop();
+                print_student(n.ss);
+                break;
+
+            case '3':
+                flag = 0;
+                break;
+        }
+    }
+
+    return 0;
+}
+
+struct student fill_name(void) {
+    struct student st;
+    printf("Enter your ID \n");
+    scanf("%d", &st.id);
+    printf("Enter your Name \n");
+    scanf("%s", st.name);
+
+    return st;
+}
+
+void print_student(struct student st) {
+    printf("\n");
+    printf("ID IS : %d", st.id);
+    printf("\n");
+    printf("NAME IS : %s", st.name);
+}
+
+int push(struct student st) {
+    int retval = 0;
+    struct node *ptr;
+    ptr = (struct node *)malloc(sizeof(struct node));
+    
+    if (ptr) {
+        ptr->ss = st;
+        ptr->pprev = NULL;
+        retval = 1;
+
+        if (!ptail) {
+            ptail = ptr;
+        } else {
+            ptr->pprev = ptail;
+            ptail = ptr;
+        }
+    }
+
+    return retval;
+}
+
+struct student pop(void) {
+    struct student st;
+    struct node *ptr;
+    ptr = ptail;
+
+    if (ptr) {
+        st = ptr->ss;
+        ptail = ptr->pprev;
+        free(ptr);
+    }
+
+    return st;
+}

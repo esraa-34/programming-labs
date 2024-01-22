@@ -1,0 +1,115 @@
+//Q1
+
+#include <stdio.h>
+#include <conio.h>
+
+int main(){
+int min,max,i,num;
+clrscr();
+scanf("%d",&num);
+max=num;
+min= num;
+for(i=1;i<5;i++){
+scanf("%d",&num);
+if(num>max){
+max=num;
+
+}
+if(num<min){
+min=num;
+
+
+}
+}
+printf("max=%d   min = %d",max,min);
+getch();
+return 0;
+}
+
+//Q2
+
+#include <stdio.h>
+#include <conio.h>
+
+int main(){
+
+int size,num,row,col,rem;
+clrscr();
+printf("please enter the size\n");
+scanf("%d",&size);
+clrscr();
+if(size%2 != 0&&size !=1){
+  for(num=1;num<= size*size;num++){
+     if(num==1){
+	row=1;
+	col=(size+1)/2;
+      }else{
+	rem=(num-1)%size;
+	if(rem!=0){
+	   if(row<=1){
+	     row=size;
+	   }else{
+	      row--;
+	      }
+	       if(col<=1){
+		   col=size;
+		}else{
+		   col--;
+		  }
+
+	}else{
+	  if(row>size){
+	     row=1;
+	      }else{
+		 row++;
+	      }
+
+          }
+}
+
+gotoxy(col,row);
+printf("%d",num);
+
+}
+}else{
+printf("invalid size");
+}
+getch();
+return 0;
+}
+
+//Q3
+
+#include <stdio.h>
+#include <conio.h>
+
+int main(){
+
+int num;
+clrscr();
+printf("enter your choice \n");
+
+printf("1\file\n");
+printf("2\edit\n");
+printf("3\save\n");
+printf("4\exit\n");
+scanf("%d",&num
+);
+do{
+switch(num){
+case 1:
+     printf("file");
+   break;
+case 2:
+     printf("edit");
+   break;
+case 3:
+     printf("save");
+   break;
+
+
+}
+}while(num<4&&num>1);
+getch();
+return 0;
+}

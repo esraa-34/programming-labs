@@ -1,0 +1,188 @@
+//Q1
+
+#include <stdio.h>
+#include <conio.h>
+
+void Add(int x,int y);
+void Subtract(int x, int y);
+void Multiply(int x,int y);
+void Devide(int x,int y);
+
+int main(){
+char ch;
+int x,y;
+int row=1;
+int col=1;
+int flag=0;
+clrscr();
+printf("Add\n");
+printf("Subtract\n");
+printf("Multiply\n");
+printf("Devide\n");
+printf("Exit\n");
+gotoxy(col,row);
+while(flag!=1){
+ch = getch();
+if(ch=='\0'){
+  ch=getch();
+  if(ch==80&&row<6){
+   row++;
+   gotoxy(col,row);
+
+
+  }else if(ch==72&&row>1){
+    row--;
+    gotoxy(col,row);
+  }else if(ch==71){
+  row=1;
+
+    gotoxy(col,row);
+
+  }else if(ch==79)
+  {row=5;
+
+   gotoxy(col,row);
+  }
+}
+else{
+  if(ch==27){
+    flag=1;
+
+  }else if(ch==13)
+  {clrscr();
+  printf("Add\n");
+  printf("Subtract\n");
+  printf("Multiply\n");
+  printf("Devide\n");
+  printf("EXit\n");
+   if(row==1)
+   { gotoxy(1,10);
+   printf("Enter first number  ");
+   scanf("%d",&x);
+   printf("Enter second number  ");
+   scanf("%d",&y);
+   Add(x,y);
+   }else if(row==2)
+  {
+    gotoxy(1,10);
+   printf("Enter first number  ");
+  scanf("%d",&x);
+  printf("Enter second number  ");
+   scanf("%d",&y);
+    Subtract(x,y);
+   }else if(row==3){
+   gotoxy(1,10);
+    printf("Enter first number  ");
+   scanf("%d",&x);
+   printf("Enter second number  ");
+   scanf("%d",&y);
+    Multiply(x,y);
+   } else if(row==4)
+   {gotoxy(1,10);
+   printf("Enter first number  ");
+      scanf("%d",&x);
+      printf("Enter second number  ");
+      scanf("%d",&y);
+      Devide(x,y);
+
+   } else if(row==5){
+
+      flag=1;
+
+   }
+  }
+
+
+}
+ }
+
+return 0;
+}
+void Add(int x,int y){
+
+
+printf("the sum is = %d",(x+y));
+
+}
+void Subtract(int x,int y){
+
+printf("The subtraction is = %d",(x-y));
+
+
+}
+void Multiply(int x,int y){
+
+printf("The product is= %d",(x*y));
+
+
+}
+void Devide(int x,int y){
+
+printf("The quotient is = %d",(x/y));
+}
+
+//Q2
+
+#include <stdio.h>
+#include <conio.h>
+
+long Pow(int x,int y);
+
+int main(){
+
+int x;
+int y;
+long r;
+clrscr();
+
+printf("Enter the base  ");
+scanf("%d",&x);
+printf("Enter the power  ");
+scanf("%d",&y);
+
+r=Pow(x,y);
+printf("the result is = %ld ",r);
+
+
+getch();
+return 0;
+
+
+}
+long Pow(int x,int y){
+long result=1;
+if(y==0){
+ result= 1;
+}else
+{
+result=x*Pow(x,y-1);
+}
+return result;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

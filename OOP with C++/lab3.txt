@@ -1,0 +1,120 @@
+//Q1
+
+#include <iostream.h>
+#include <conio.h>
+#include <complex.h>
+class point{
+  int x,y;
+ public:
+  point(){x=y=0;}
+  point(int m){x=y=m;}
+  point(int m,int n){
+  x=m;
+  y=n;
+  }
+  void setx(int m){x=m;}
+  void sety(int n){y=n;}
+  int getx(){return x;}
+  int gety(){return y;}
+
+};
+
+class Rectangle_c{
+ point p1,p2;
+ int length,width;
+public:
+ Rectangle_c(int x1,int y1,int x2,int y2):p1(x1,y1),p2(x2,y2){
+
+  length= abs(x2-x1);
+  width= abs(y2-y1);
+
+ }
+ void setp1(int x,int y){
+   p1.setx(x);
+   p1.sety(y);
+   length=abs(p2.getx()-x);
+   width= abs(p2.gety()-y);
+
+ }
+ void setp2(int x,int y){
+  p2.setx(x);
+  p2.sety(y);
+  length= abs(x-p1.getx());
+  width= abs(y-p1.gety());
+
+ }
+ point getp1(){
+  return p1;
+ }
+ point getp2(){
+  return p2;
+ }
+ int Area(){
+  return (length*width);
+ }
+
+
+};
+class Rectangle_a{
+  point *pt1;
+  point *pt2;
+  int width,length;
+public:
+  Rectangle_a(){
+   pt1=pt2=NULL;
+   length=width=0;
+  }
+  Rectangle_a(point *p1,point *p2){
+   pt1=p1;
+   pt2=p2;
+   if(pt1 !=NULL && pt2 != NULL){
+      length= abs(pt2->getx()-pt1->getx());
+      width= abs(pt2->gety()-pt1->gety());
+
+
+   }else{length=width=0;}
+
+  }
+  void setp1(point *p){
+   pt1=p;
+     if(pt1 !=NULL && pt2 != NULL){
+      length= abs(pt2->getx()-pt1->getx());
+      width= abs(pt2->gety()-pt1->gety());
+
+
+   }else{length=width=0;}
+
+  }
+
+  void setp2(point *p){
+   pt2=p;
+     if(pt1 !=NULL && pt2 != NULL){
+      length= abs(pt2->getx()-pt1->getx());
+      width= abs(pt2->gety()-pt1->gety());
+
+
+   }else{length=width=0;}
+
+  }
+  point getp1(){
+   return *pt1;
+  }
+
+  point getp2(){
+   return *pt2;
+  }
+  int Area(){
+   return (length*width);
+  }
+};
+int main(){
+   Rectangle_c rectc(0,0,2,2);
+   clrscr();
+   cout<<"Area : "<<rectc.Area()<<endl;
+   point p1(0,0);
+   point p2(4,4);
+   Rectangle_a recta(&p1,&p2);
+   cout<<"Area : "<<recta.Area();
+getch();
+return 0;
+}

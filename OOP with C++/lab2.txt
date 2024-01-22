@@ -1,0 +1,307 @@
+//Q1
+
+#include <iostream.h>
+#include <string.h>
+#include <conio.h>
+#include <new.h>
+
+class Employee{
+  int id;
+  char * name;
+  float salary;
+  static char* comname;
+  static int count;
+public:
+  void setEmployee(int d,char na[10],float sal);
+  void setSalary(float s);
+  float getSalary();
+  void setId(int d);
+  int getId();
+  void setName(char n[10]);
+  char* getName();
+  Employee& operator=(Employee &e);
+  Employee operator+(char * n);
+  Employee operator+(float sal);
+	   operator int();
+	   operator char*();
+  Employee operator+(Employee e);
+  int operator==(Employee e);
+  Employee operator++();
+  Employee operator++(int d);
+  friend Employee operator+(int i,Employee e);
+  friend Employee operator+ (char* n,Employee e);
+
+  Employee(){
+    id=1;
+    name=new char[6];
+    salary=10000;
+    strcpy(name,"esraa");
+    count++;
+  }
+  Employee(int d){
+   id=d;
+   salary=2000;
+   name=new char[4];
+   strcpy(name,"ali");
+   count++;
+
+  }
+
+  Employee(char * n){
+    id=3;
+    salary=100;
+    name= new char[strlen(n)+1];
+    strcpy(name,n);
+    count++;
+
+  }
+  Employee(int d,char * n,float sa){
+   id=d;
+   salary=sa;
+   name=new char[strlen(n)+1];
+   strcpy(name,n);
+   count++;
+  }
+   static int getcount(){return count;}
+   static void setcomname(char* cn){
+     delete comname;
+     comname=new char[strlen(cn)+1];
+     strcpy(comname,cn);
+   }
+   static char* getcomname(){
+     return comname;
+   }
+
+  ~Employee(){
+    delete(name);
+    count--;
+  }
+
+  Employee(Employee & e){
+      int size=strlen(e.name);
+      name=new char[size+1];
+      strcpy(name,e.name);
+      id=e.id;
+      salary=e.salary;
+
+  }
+
+
+};
+int Employee::count=0;
+char* Employee::comname="ITI";
+
+Employee fillEmployee();
+void printEmployee(Employee e);
+
+
+int main(){
+ // Employee emp;
+ // Employee emp1(2);
+ // Employee emp2(2,"nada");
+ // Employee emp3(3,"sara",4000);
+    Employee emp1,emp2("Ahmed");
+    Employee emp3(1,"Aly",2000);
+  clrscr();
+   cout<<"NUMBER OF EMPLOYEE: "<<Employee::getcount()<<endl;
+   printEmployee(emp1);
+  cout<<"company :"<<Employee::getcomname()<<endl;
+   Employee::setcomname("STC");
+
+   printEmployee(emp1) ;
+  cout<<"company :"<<Employee::getcomname();
+ // emp=fillEmployee();
+ /* printEmployee(emp1=emp2);
+  cout<<endl;
+  printEmployee(emp2+"Mohamed");
+  cout<<endl;
+  printEmployee(emp2+1000);
+  cout<<endl;
+  cout<<"id  :"<<(int)emp3;*/
+ // cout<<endl;
+ // cout<<"name  :"<<(char*)emp3;
+ /* cout<<endl;
+  printEmployee(emp1+emp2);
+   cout<<endl;
+  printEmployee(1+emp1);
+   cout<<endl;
+  printEmployee("ALY"+emp3);
+   cout<<endl;
+  printEmployee(emp1++);
+   cout<<endl;
+  printEmployee(emp1);
+   cout<<endl;
+ // printEmployee(++emp1);
+  cout<<endl;
+  if(emp2==emp3){
+   cout<<"YES"<<endl;
+  }else{
+  cout<<"NO"<<endl;
+  }*/
+
+  getch();
+return 0;
+
+}
+
+void Employee::setEmployee(int d,char * na,float sal){
+      id=d;
+      delete(name);
+      name=new char[strlen(na)+1];
+      strcpy(name,na);
+      salary=sal;
+
+  }
+void Employee::setSalary(float s){
+      salary=s;
+
+  }
+float Employee::getSalary(){
+     return salary;
+  }
+
+void Employee::setId(int d){
+      id=d;
+
+  }
+int Employee::getId(){
+     return id;
+  }
+void Employee::setName(char n[10]){
+       delete(name);
+       name=new char[strlen(n)+1];
+	strcpy(name,n);
+    }
+char* Employee::getName(){
+      return name;
+
+  }
+
+/*Employee fillEmployee(){
+ Employee emp;
+ int id;
+ char name[10];
+ float salary;
+ cout<<"Enter your id"<<endl;
+ cin>>id;
+ cout<<"Enter your name"<<endl;
+ cin>>name;
+ cout<<"Enter your salary"<<endl;
+ cin>>salary;
+ emp.setEmployee(id,name,salary);
+
+ return emp;
+
+}*/
+ Employee fillEmployee(){
+ Employee emp;
+ int id;
+ char name[10];
+ float salary;
+
+ cout<<"Enter your id"<<endl;
+ cin>>id;
+ cout<<"Enter your name"<<endl;
+ cin>>name;
+ cout<<"Enter your salary"<<endl;
+ cin>>salary;
+ //emp.setEmployee(id,name,salary);
+   emp.setId(id);
+  emp.setName(name);
+  emp.setSalary(salary);
+ return emp;
+
+}
+void printEmployee(Employee e){
+
+  cout<<"Employee id is: "<<e.getId()<<endl;
+  cout<<"Employee name is: "<<e.getName()<<endl;
+  cout<<"Employee salary is: "<<e.getSalary()<<endl;
+
+
+}
+
+Employee& Employee::operator=(Employee &e){
+   id=e.id;
+   salary=e.salary;
+   delete(name);
+   name=new char[strlen(e.name)+1];
+   strcpy(name,e.name);
+   return *this;
+
+}
+  Employee Employee::operator+(char * n){
+  // Employee temp;
+   char *ptr;
+   ptr=new char[strlen(n)+strlen(name)+2];
+  // temp.id=id;
+  // temp.salary=salary;
+   strcpy(ptr,name);
+   strcat(ptr," ");
+   strcat(ptr,n);
+   Employee temp(id,ptr,salary);
+   delete(ptr);
+   return temp;
+
+  }
+  Employee Employee::operator+(float sal){
+   Employee temp;
+   temp.id=id;
+   temp.salary=salary+sal;
+   strcpy(temp.name,name);
+   return temp;
+
+  }
+
+	  Employee::operator int(){
+	   return id;
+
+	   }
+	   Employee::operator char*(){
+
+	    return name;
+	   }
+  Employee Employee::operator+(Employee e){
+   // Employee temp;
+   // temp.salary=e.salary+salary;
+   // temp.id=e.id+id;
+   char *ptr;
+   ptr=new char[strlen(e.name)+strlen(name)+2];
+   strcpy(ptr,name);
+   strcat(ptr," ");
+   strcat(ptr,e.name);
+   Employee temp((id+e.id),ptr,(salary+e.salary));
+   delete(ptr);
+   return temp;
+
+  }
+  int Employee::operator==(Employee e){
+   return(id==e.id&&name==e.name&&salary==e.salary);
+
+  }
+
+  Employee Employee::operator++(){
+   id++;
+   return *this;
+
+  }
+  Employee Employee::operator++(int d){
+
+   Employee old;
+   old= *this;
+   salary++;
+   return old;
+
+  }
+  Employee operator+(int i,Employee e){
+
+    Employee temp;
+    temp.id=i+e.id;
+    temp.salary=e.salary;
+    temp.name=e.name;
+    return temp;
+
+  }
+  Employee operator+ (char* n,Employee e){
+	return (e+n);
+  }

@@ -1,0 +1,27 @@
+#include <iostream.h>
+#include <conio.h>
+
+//Q1
+
+int x=3;
+int print(int x=3,int y=9);
+float print(float x,float y);
+int main(){
+ int x=5;
+ clrscr();
+ cout<<x<<endl;
+ cout<<::x<<endl;
+ cout<<print(1.f,2.2f);
+
+ getch();
+
+ return 0;
+
+}
+int print(int x,int y){
+  return x+y;
+}
+float print(float x,float y){
+  return x*y;
+
+}

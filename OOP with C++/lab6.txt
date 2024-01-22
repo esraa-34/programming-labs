@@ -1,0 +1,87 @@
+//Q1
+
+#include <iostream.h>
+#include <fstream.h>
+#include <conio.h>
+#include <string.h>
+
+class Employee
+{
+  int id;
+  char name[6];
+  public:
+    Employee()
+    { id=1;
+       strcpy(name,"esraa");
+
+    }
+    Employee(int i,char n[6])
+    { id=i;
+      strcpy(name,n);
+
+    }
+    void setid(int i)
+    { id=i;
+
+    }
+    void setname(char n[6])
+    {
+     strcpy(name,n);
+    }
+    int getid()
+    {
+      return id;
+    }
+    char* getname()
+    {
+     return name;
+    }
+
+    friend ostream& operator <<(ostream &out,Employee e);
+    friend istream& operator >>(istream &in,Employee &e);
+
+};
+
+ostream& operator <<(ostream &out,Employee e)
+{
+ out<<"id: "<<e.id<<endl;
+ out<<"Name: "<<e.name<<endl;
+ return out;
+}
+istream &operator>>(istream &in, Employee &em)
+{
+  cout << "Enter ID: ";
+  in >> em.id;
+  cout << "Enter Name: ";
+  in >> em.name;
+  return in;
+}
+int main(){
+ clrscr();
+ Employee e;
+ cin>>e;
+ cout<<e;
+  fstream f1;
+  f1.open("em1.txt", ios::out);
+  f1 << e;
+  f1.close();
+
+  fstream f2;
+  f2.open("emp2.txt",ios::out|ios::binary);
+   f2.write((char*)&e,sizeof(Employee));
+  f2.close();
+
+  fstream f3;
+  f3.open("em1.txt", ios::in);
+  f3>>e;
+  f3.close();
+  cout << e;
+  Employee e1;
+  fstream f4;
+  f4.open("emp2.txt",ios::in|ios::binary);
+  f4.read((char*)&e1,sizeof(Employee));
+  f4.close();
+  cout<<e1;
+ getch();
+return 0;
+}

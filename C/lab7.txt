@@ -1,0 +1,62 @@
+//Q1
+
+#include <stdio.h>
+#include <conio.h>
+struct student{
+int id;
+char name[10];
+//int grades[3];
+
+};
+struct node{
+struct student st;
+struct node* pprev;
+struct node * pnext;
+};
+struct node* phead;
+struct node *ptail;
+struct student fill_name(void);
+void printstudent(struct student st);
+struct *node createnode(struct student st);
+int addnode(struct student st);
+int insertnode(struct student st,int loc);
+struct node* searchnode(struct student st);
+int deletenode(int loc);
+void printlist(node* phead);
+int main(){
+
+
+
+
+
+getch();
+return 0;
+}
+struct student fill_name(void){
+struct student st;
+printf("Enter your ID\n");
+scanf("%d",&st.id);
+printf("Enter your name\n");
+scanf("%s",st.name);
+
+ return st;
+
+
+}
+void printstudent(struct student st){
+
+printf("%d\n",st.id);
+printf("%s\n",st.name);
+
+
+}
+struct *node createnode(struct student st){
+
+
+
+}
+int addnode(struct student st);
+int insertnode(struct student st,int loc);
+struct node* searchnode(struct student st);
+int deletenode(int loc)
+void printlist(node* phead);
